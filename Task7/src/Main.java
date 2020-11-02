@@ -37,6 +37,7 @@ public class Main {
             temp = 0;
             zeroException = false;
         }
+        if (max == Integer.MIN_VALUE) return -1;
         return max;
     }
 

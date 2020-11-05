@@ -5,14 +5,14 @@ public class Main {
     public static void main(String[] args) {
         test();
         int[] array = ArrayUtils.readIntArrayFromConsole();
-        System.out.println(solution(array));
-     //   System.out.println(JayKadaneAlgorithm(array));
+        System.out.println("Ответ: " + solution(array));
+        //System.out.println(JayKadaneAlgorithm(array));
 
     }
 
     public static long solution(int[] array) {
         if (array.length < 1) {
-            //      System.out.println("Incorrect array");
+            //System.out.println("Incorrect array");
             return 0;
         }
         long sum = 0;

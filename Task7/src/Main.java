@@ -3,16 +3,20 @@ import util.ArrayUtils;
 public class Main {
 
     public static void main(String[] args) {
+        test();
         int[] array = ArrayUtils.readIntArrayFromConsole();
         System.out.println(solution(array));
-        // System.out.println(JayKadaneAlgorithm(array));
-        // можно написать System.out.println(solution(ArrayUtils.readIntArrayFromConsole()))
-        // но я думаю это некрасиво (возможно я не прав)
+     //   System.out.println(JayKadaneAlgorithm(array));
+
     }
 
-    public static int solution(int[] array) {
-        int sum = 0;
-        int max = Integer.MIN_VALUE;
+    public static long solution(int[] array) {
+        if (array.length < 1) {
+            //      System.out.println("Incorrect array");
+            return 0;
+        }
+        long sum = 0;
+        long max = Integer.MIN_VALUE;
         for (int i = 0; i < array.length; i++) {
             sum += array[i];
             if (sum > max) max = sum;
@@ -23,10 +27,10 @@ public class Main {
         return max;
     }
 
-    public static int JayKadaneAlgorithm(int[] a) {      // честно взятый из интернета алгоритм
-        int ans = a[0],                                  // я не совсем понимаю, почему он работает,
-                sum = 0;                                 // но он был взят для проверки
-        for (int r = 0; r < a.length; ++r) {             // не работает, если все числа отрицательные
+    public static long JayKadaneAlgorithm(int[] a) {      // честно взятый из интернета алгоритм
+        long ans = 0,                                     // я не совсем понимаю, почему он работает,
+                sum = 0;                                  // но он был взят для проверки
+        for (int r = 0; r < a.length; ++r) {              // не работает, если все числа отрицательные
             sum += a[r];
             sum = Math.max(sum, 0);
             ans = Math.max(ans, sum);
@@ -34,12 +38,81 @@ public class Main {
         return ans;
     }
 
-    public static int maxNegativeNumber(int[] array) {
-        int max = Integer.MIN_VALUE;
+    public static long maxNegativeNumber(int[] array) {
+        long max = Long.MIN_VALUE;
         for (int i = 0; i < array.length; i++) {
             if (array[i] > max && array[i] < 0) max = array[i];
         }
         return max;
+    }
+
+    public static void test() {
+
+        // Возможно это невероятно глупо, но так как количество элементов массива нельзя изменять, я не знаю,
+        // как сделать лучше. Но я думаю, что сборщик мусора умнее меня и лишние 10 массивов в памяти некритичны.
+
+        int[] a = {};
+        printArray(a);
+        System.out.println("Ответ: " + solution(a));
+        System.out.println("-----------------------------------------------------------------------------------------");
+
+        int[] b = {1, 2, 3, 4};
+        printArray(b);
+        System.out.println("Ответ: " + solution(b));
+        System.out.println("-----------------------------------------------------------------------------------------");
+
+        int[] c = {0, 0, 0, 0, 0, 0, 0};
+        printArray(c);
+        System.out.println("Ответ: " + solution(c));
+        System.out.println("-----------------------------------------------------------------------------------------");
+
+        int[] d = {1000000000, 1000000000, 1000000000, 1000000000, 1000000000};
+        printArray(d);
+        System.out.println("Ответ: " + solution(d));
+        System.out.println("-----------------------------------------------------------------------------------------");
+
+        int[] e = {-1, 1, 2, -20, 30, 40, -70, 1};
+        printArray(e);
+        System.out.println("Ответ: " + solution(e));
+        System.out.println("-----------------------------------------------------------------------------------------");
+
+        int[] f = {-1, 2, -3, 4, -5, 6, -7, 8, 8, -10, 11};
+        printArray(f);
+        System.out.println("Ответ: " + solution(f));
+        System.out.println("-----------------------------------------------------------------------------------------");
+
+        int[] g = {-1};
+        printArray(g);
+        System.out.println("Ответ: " + solution(g));
+        System.out.println("-----------------------------------------------------------------------------------------");
+
+        int[] h = {-1, -2, -3, -4, 0, -12};
+        printArray(h);
+        System.out.println("Ответ: " + solution(h));
+        System.out.println("-----------------------------------------------------------------------------------------");
+
+        int[] i = {1, 2, 3, 4, -5, -4, 1, 2, 8};
+        printArray(i);
+        System.out.println("Ответ: " + solution(i));
+        System.out.println("-----------------------------------------------------------------------------------------");
+
+        int[] j = {-1, -2, -31234, -1235123};
+        printArray(j);
+        System.out.println("Ответ: " + solution(j));
+        System.out.println("-----------------------------------------------------------------------------------------");
+
+
+    }
+
+    public static void printArray(int[] array) {
+        System.out.println("Введенный массив:");
+        if (array.length < 1) System.out.println("null");
+        else {
+            for (int i = 0; i < array.length; i++) {
+                System.out.print(array[i] + " ");
+            }
+            System.out.println();
+        }
     }
 
 
@@ -48,7 +121,7 @@ public class Main {
     */
 
     public static int wrongSolution(int[] array) {
-/*
+    /*
         фактически это решение в один проход,
         так как в цикле while просто обходится последовательность подряд идущих одинаковых чисел,
         которая не включается в основной цикл
